@@ -1,88 +1,64 @@
 import Head from 'next/head'
-import { Container, Row, Card, Button } from 'react-bootstrap'
+import Link from 'next/link'
+import { Container, Card, Button } from 'react-bootstrap'
 
 export default function Home() {
+  const openCheckout  = () => { 
+    Paddle.Checkout.open({ product: 12327 });
+  }
   return (
     <Container className="md-container">
       <Head>
-        <title>ReactJS with react-bootstrap</title>
+        <title>Paddle App</title>
         <link rel="icon" href="/favicon-32x32.png" />
+        <script type="text/javascript" src="https://cdn.paddle.com/paddle/paddle.js"></script>
+        <script type="text/javascript" src="/js/paddle-setup.js"></script>
       </Head>
       <Container>
         <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          A simple <a href="https://nextjs.org">Next.js</a> Paddle app.
         </h1>
-        <p>
-          Get started by editing <code>pages/index.js</code>
-        </p>
         <Container>
-          <Row className="justify-content-md-between">
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Documentation</Card.Title>
-                <Card.Text>
-                  Find in-depth information about Next.js features and API.
-                </Card.Text>
-                <Button variant="primary" href="https://nextjs.org/docs">
-                  More &rarr;
-                </Button>
-              </Card.Body>
+
+            <Card>
+              <div class="card-body">
+                <h3 class="card-title">Using the Overlay Checkout.{' '}</h3>
+                <p class="card-text">Import Head from 'next/head' to add custom elements to the `head` of your page
+                with the built-in Head component, and add Paddle JS to the head in a script tag. Using traditional HTML <code>script</code> tags
+                in the <code>head</code> avoids a TypeError present when using <code>Script</code> from <code>next/script</code></p>
+                <p class="card-text">Create a javascript file with your Paddle setup instructions (e.g. environment,
+                vendor id, callbacks) in /public/js and link to this with a script tag in the page head.</p>
+                <p class="card-text">Define a constant named openCheckout to use as with the onClick event, similar to
+                the React implementation in the <Link href="https://developer.paddle.com/guides/how-tos/checkout/paddle-checkout#invoking-the-flexible-checkout">
+                Paddle documentation</Link>.</p> 
+                <p><code>const openCheckout  = () => {'{'}<br></br>
+                Paddle.Checkout.open({'{'} product: 12345 {'}'});<br></br>{'}'}</code></p>
+                <p>Finally add a button with the onClick event set to openCheckout, such as the one below.</p>
+                <Button variant="primary" onClick={openCheckout}>Buy Now!</Button>{' '}
+              </div>
             </Card>
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Learn</Card.Title>
-                <Card.Text>
-                  Learn about Next.js in an interactive course with quizzes!
-                </Card.Text>
-                <Button variant="primary" href="https://nextjs.org/learn">
-                  More &rarr;
-                </Button>
-              </Card.Body>
+            <Card>
+              <div class="card-body">
+                <h3 class="card-title">Using the Inline Checkout.{' '}</h3>
+                <p class="card-text">As with the Overlay Checkout, Import Head from 'next/head' to add custom elements to the 
+                `head` of your page with the built-in Head component, and add Paddle JS to the head in a script tag.</p>
+                <p class="card-text">Create a javascript file with your Paddle setup instructions (e.g. environment,
+                vendor id, callbacks) in /public/js and link to this with a script tag in the page head.</p>
+                <p class="card-text">Create a second javascript file to specify the parameters called with the <code>Paddle.Checkout.open()
+                </code> method. You need to pass the parameter <code>method: 'inline'</code> to specify an inline checkout</p>
+                <p class="card-text">Add the div/define the component that you wish to target for the inline checkout. Set the class 
+                name to be <code>checkout-container</code>.</p>
+                <p class="card-text">Finally, add a script tag pointing to the javascript file specifying the parameters for <code>Paddle.Checkout.open()
+                </code>. This should be loaded after your checkout div/component.</p>
+                <Button variant="primary" href="/inline">Go to page</Button>{' '}
+              </div>
             </Card>
-          </Row>
-          <Row className="justify-content-md-between">
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Examples</Card.Title>
-                <Card.Text>
-                  Discover and deploy boilerplate example Next.js projects.
-                </Card.Text>
-                <Button
-                  variant="primary"
-                  href="https://github.com/vercel/next.js/tree/master/examples"
-                >
-                  More &rarr;
-                </Button>
-              </Card.Body>
-            </Card>
-            <Card className="sml-card">
-              <Card.Body>
-                <Card.Title>Deploy</Card.Title>
-                <Card.Text>
-                  Instantly deploy your Next.js site to a public URL with
-                  Vercel.
-                </Card.Text>
-                <Button
-                  variant="primary"
-                  href="https://vercel.com/new?utm_source=github&utm_medium=example&utm_campaign=next-example"
-                >
-                  More &rarr;
-                </Button>
-              </Card.Body>
-            </Card>
-          </Row>
+
         </Container>
       </Container>
 
       <footer className="cntr-footer">
-        <a
-          href="https://vercel.com?filter=next.js&utm_source=github&utm_medium=example&utm_campaign=next-example"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="sml-logo" />
-        </a>
+        This is where I'd put a footer if I had one.
       </footer>
     </Container>
   )
