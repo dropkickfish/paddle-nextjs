@@ -31,7 +31,7 @@ export default function Home() {
                 <p className="card-text">Define a constant named openCheckout to use as with the onClick event, similar to
                 the React implementation in the <Link href="https://developer.paddle.com/guides/how-tos/checkout/paddle-checkout#invoking-the-flexible-checkout">
                 Paddle documentation</Link>.</p> 
-                <p><code>const openCheckout  = () => {'{'}<br></br>
+                <p><code>const openCheckout  = () ={'>'} {'{'}<br></br>
                 Paddle.Checkout.open({'{'} product: 12345 {'}'});<br></br>{'}'}</code></p>
                 <p>Finally add a button with the onClick event set to openCheckout, such as the one below.</p>
                 <Button variant="primary" onClick={openCheckout}>Buy Now!</Button>{' '}
